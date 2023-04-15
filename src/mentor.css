@@ -1,0 +1,131 @@
+.mentors {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    background-image: url(./images/menbg.jpg);
+    position: relative;
+}
+
+.mentor-head {
+    position: absolute;
+    padding-top: 100px;
+    height: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.mentor-head > .main-text {
+    font-size: 70px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.mentor-head > .sub-text {
+    font-size: 25px;
+}
+
+.mentor-head > .msg {
+    color: white;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 1.5rem;
+}
+
+.mentor-head > div {
+    height: 30px;
+    padding: 0;
+}
+
+.mentor-head > div > input {
+    margin: 0;
+}
+
+.search-bar {
+    position: absolute;
+    margin-top: 25%;
+    width: 100%;
+    text-align: center;
+}
+
+.search-bar > form {
+    background-color: rgb(224, 217, 217);
+    width: 40%;
+    margin-right: 30%;
+    padding: 40px 0;
+    border-radius: 10px;
+}
+
+.search-bar > form > select {
+    height: 40px;
+    width: 25rem;
+    margin-right: 20px;
+    border: none;
+    padding: 0 1rem;
+    border-radius: 8px;
+}
+
+.card {
+    width: 300px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+
+  .card-div {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    top: 45rem;
+    left: 5rem;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+  }
+  
+  .card-description {
+    font-size: 1.2rem;
+    margin: 0 0 10px;
+  }
+  
+  .card-button {
+    display: inline-block;
+    margin-left: 5.5rem;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .skills {
+    padding: 0.2rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .skill-input {
+    width: 3.5rem;
+    margin-right: 0.3rem;
+    border-radius: 0.4rem;
+    text-align: center;
+  }
+
+  .card-button:hover {
+    background-color: #0062cc;
+  }

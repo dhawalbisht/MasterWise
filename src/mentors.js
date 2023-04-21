@@ -4,6 +4,7 @@ import Navbar from "./navbar";
 import "./mentor.css";
 import Card from "./card";
 import data from "./mentordata"
+import mentorbg from "./images/menbg.jpg"
 
 export default function Mentors() {
     const [skill, setSkill] = useState()
@@ -27,6 +28,7 @@ export default function Mentors() {
     return (
         <div className="mentor">
             <Navbar/>
+            <img src={mentorbg} alt="background" className="mentor-bg"/>
             <div className="content">
                 <div className="mentor-head">
                     <p className="main-text">LEARN & CONNECT</p>

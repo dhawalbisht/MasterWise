@@ -6,7 +6,7 @@ export default [
         imageUrl: "/profile.jpg",
         link: "https://example.com",
         buttonText: "Contact",
-        skills: ["java","python"],
+        skills: ["java","python","java","python"],
         rating: 9.8,
     },
     {

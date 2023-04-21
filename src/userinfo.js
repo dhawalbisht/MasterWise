@@ -1,40 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Navbar from "./navbar";
 import "./userinfocss.css";
 import pic from "./profimage1.png"
-const UserInfo = ({name ,password,email,phone,picture,skills}) => {
-    const names = localStorage.getItem('name');
-    const em = localStorage.getItem('email');
-    const phones = localStorage.getItem('phone');
-    const pass = localStorage.getItem('password');
-    const skill = localStorage.getItem('skills');
-    
-                
+import { db } from "./firebase-config";
+import {
+  collection,
+  getDocs,
+} from "firebase/firestore";
+
+const UserInfo = () => {
+  const [users, setUsers] = useState([])
+  const usersCollectionRef = collection(db, "users");
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    }
+    getUsers();
+  }, [])
+  const currentUserId = localStorage.getItem("userId")
   return (
-  
+    <>
+    <Navbar/>
+    <div className='main'>
+      <div className="main-img" style={{ borderRadius: "100%", height: "10rem", width: "10rem" }}>
+        <img src={pic} alt="" style={{ textAlign: "center", borderRadius: '50%' }} />
+      </div>
+      <div>
+        <form className='main-content' style={{ backgroundColor: 'transparent' }}>
 
-<div className='main'>
-<div className="main-img" style={{borderRadius: "100%", height: "10rem", width: "10rem"}}>
-        <img src={pic} alt="" style={{textAlign:"center",borderRadius:'50%'}} />
-</div>
-<div>
-<form className='main-content' style={{backgroundColor:'transparent'}}>
+          <label htmlFor="title"><strong>Name:</strong></label>
+          <input type="text" name="title" id="title" value={users[users.findIndex(user => user.id === currentUserId)]?.name} readOnly />
+          <label htmlFor="email"><strong>Email Id:</strong></label>
+          <input name="email" id="email" value={users[users.findIndex(user => user.id === currentUserId)]?.email} />
+          <label htmlFor="phonenumber"><strong>phonenumber:</strong></label>
+          <input type="number" name="number" id="phone" value={users[users.findIndex(user => user.id === currentUserId)]?.phone} />
+          <label htmlFor="password"><strong>Password:</strong></label>
+          <input type="password" name="password" id="password" value={users[users.findIndex(user => user.id === currentUserId)]?.password} />
 
-  <label htmlFor="title"><strong>Name:</strong></label>
-  <input type="text" name="title" id="title" value={names} readOnly/>
-  <label htmlFor="email"><strong>Email Id:</strong></label>
-  <input name="email" id="email" value={em}  />
-  <label htmlFor="phonenumber"><strong>phonenumber:</strong></label>
-  <input type="number" name="number" id="phone" value={phones}  />
-  <label htmlFor="password"><strong>Password:</strong></label>
-  <input type="password" name="password" id="password" value={pass}  />
+          <label htmlFor="skills"><strong>Skills:</strong></label>
+          <input type="skill" name="skill" id="skill" value={users[users.findIndex(user => user.id === currentUserId)]?.skills} />
 
-  <label htmlFor="skills"><strong>Skills Aquired:</strong></label>
-  <input type="skill" name="skill" id="skill" value={skill}  />
-
-  <button type="submit">Explore</button>
-</form>
-</div>
-</div>
+          <button type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+    </>
   );
 };
 

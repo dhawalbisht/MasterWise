@@ -1,46 +1,74 @@
-import React, { useState } from "react";
-import { getAuth } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import './login.css'
+import { auth, db } from "./firebase-config";
+import pict from "./mentorlogo.png";
+import { collection, getDocs } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import previousimg from "./images/previous.png"
+import "./login.css"
+const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users");
+  const navigate = useNavigate();
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userid,setUserId] = useState()
-  const auth = getAuth();
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredential = await auth.signInWithEmailAndPassword(email, password);
-      const userId = userCredential.user.uid;
-      setUserId(userId)
-      localStorage.setItem('userId',userId)
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     }
-  };
+    getUsers();
+  }, [])
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const result = users.findIndex(user => user.email === email && user.password === password)
+    if (result < 0) {
+      console.log("not found")
+    }
+    else {
+      localStorage.setItem("userId", users[result].id)
+      navigate('/');
+    }
+  }
 
   return (
-    <form onSubmit={handleSignIn}>
-      <div>
-        <label>Email:</label>
+    <div className="login">
+      <div className="imglogo">
+        <img src={pict} alt="Mentorz Logo" />
+      </div>
+      <form className="login-form">
+        <div className="heading">
+          <NavLink className="nav-links" to="/"><img src={previousimg} alt="home-page" height="40rem" /></NavLink>
+          <p>Log in</p>
+        </div>
+        Email:
         <input
           type="email"
+          placeholder="Enter your email"
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            setEmail(event.target.value)
+          }}
         />
-      </div>
-      <div>
-        <label>Password:</label>
+        Password:
         <input
           type="password"
+          placeholder="Enter your password"
           value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => {
+            setPassword(event.target.value)
+          }}
         />
-      </div>
-      <NavLink to="/"><button type="submit">Login</button></NavLink>
-    </form>
-  );
-};
+        <button onClick={handleSubmit}>Submit</button>
+        <h4>
+          Don't have an account?
+          <NavLink className="nav-links" to="/signup">Create account</NavLink>
+        </h4>
+      </form>
+    </div>
+  )
+}
 
-export default Login;
+export default SignIn

@@ -1,40 +1,39 @@
 import React from "react";
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import logo from "./images/logo.png"
-import { useState , useEffect } from "react";
-import { db } from "./firebase-config";
-import {
-  getDocs,
-  collection
-} from "firebase/firestore";
+import Profile from "./userinfo";
 
 
 export default function Navbar() {
-    const [users, setUsers] = useState([]);
-    const usersCollectionRef = collection(db, "users");
-    useEffect(() => {
-        const getUsers = async () => {
-          const data = await getDocs(usersCollectionRef);
-          setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-    
-        getUsers();
-      }, []);
-
+    const userid = localStorage.getItem("userId")
+    const handleSignOut = () => {
+        localStorage.removeItem("userId");
+        window.location.reload();
+    }
     return (
         <div className="navbar">
-            <div className="brand">
-                <img src={logo} alt="logo" />
-                <h1>MentorWise</h1>
-            </div>
-            <div>
-            <ul className="nav-list">
-            <li><NavLink className="nav-links" to="/">Home</NavLink></li>
-                <li><NavLink className="nav-links" to="/mentors">Mentors</NavLink></li>
-                <li><a className="nav-links" href="https://videocall-951f3.web.app/" target="_blank">Video Call</a></li>
-                <li><NavLink className="nav-links" to="/login">Login</NavLink></li>
-                {users.name?<li><NavLink className="nav-links" to="/signup">Signup</NavLink></li>:<li><NavLink className="nav-links" to="/signup">Signup</NavLink></li>}
-            </ul>
+            <div className="navbar-inside">
+                <div className="brand">
+                    <img src={logo} alt="logo" />
+                    <h1>MentorWise</h1>
+                </div>
+                <div>
+                    <ul className="nav-list">
+                        <li><NavLink className="nav-links" to="/">Home</NavLink></li>
+                        <li><NavLink className="nav-links" to="/mentors">Mentors</NavLink></li>
+                        <li><a className="nav-links" href="https://videocall-951f3.web.app/" target="_blank">Video Call</a></li>
+                        {
+                            userid ?
+                                <div style={{ display: "flex" }}>
+                                    <li><NavLink className="nav-links" to="/userinfo">Profile</NavLink></li>
+                                    <li onClick={handleSignOut}><NavLink className="nav-links" to="/">SignOut</NavLink></li>
+                                </div> :
+                                <div style={{ display: "flex" }}>
+                                    <li><NavLink className="nav-links" to="/login">Login</NavLink></li>
+                                </div>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     )

@@ -5,8 +5,8 @@ function Front() {
         <div className='front-main'>
             <img src={img} alt="" />
             <div className='front'>
-                <p className='main-content'>GET AHEAD,<br /> LEARN FROM THE BEST</p>
-                <p className='sub-content'>"Unlock Your Potential with Expert Mentors! Join Us to Learn, Grow, and Excel!"</p>
+                <p>Get Ahead!<br/>Learn from the best</p>
+                <h4>Unlock Your Potential with Expert Mentors! Join Us to Learn, Grow, and Excel!"</h4>
             </div>
         </div>
     )

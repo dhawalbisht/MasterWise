@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import pict from "./mentorlogo.png";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./profile.css";
-import Navbar from './navbar';
 import { db, auth } from "./firebase-config";
 import {
   collection,
@@ -20,8 +19,9 @@ function ContactForm() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(0);
   const [userid, setUserId] = useState();
+  const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -50,8 +50,8 @@ function ContactForm() {
   };
 
   const upload = async () => {
-    await addDoc(usersCollectionRef, { 
-      name: name, 
+    await addDoc(usersCollectionRef, {
+      name: name,
       email: email,
       phone: phone,
       password: password,
@@ -63,69 +63,71 @@ function ContactForm() {
     event.preventDefault();
     console.log(userid);
     if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return;
-      }
-  navigate('/'); 
+      alert('Passwords do not match!');
+      return;
+    }
+    navigate('/');
 
   };
-  
+
   return (
     <>
-    <Navbar/>
-    <div style={{display:'flex',position:'relative'}}>
-        <div className="imglogo" style={{backgroundColor:'transparent'}}>
-            <img src={pict} alt="Mentorz Logo" />
+      <div classname="profile">
+        <div className="imglogo">
+          <img src={pict} alt="Mentorz Logo" />
         </div>
 
-    <form onSubmit={handleSubmit}>
-        <div className='formup'>
-<div><h2>Fill Details</h2></div>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={handleNameChange} />
-      </label>
-      <br />
-      <label>
-        Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </label>
-      <br />
-      <label>
-        Phone Number:
-        <input type="number" value={phone} onChange={handlePhoneChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <br />
-      <label>
-        Confirm Password:
-        <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
-      </label>
-      <br />
-      <label>
-        Skills:
-        <textarea value={skills} onChange={handleSkillsChange} />
-      </label>
-      <br />
-      <label>
-        Aadhar Card:
-      <input type="file" id="picture" name="picture" onChange={(event) => setPicture(event.target.files[0])} />
-      </label>
-      <br />
-      <label>
-        Message:
-        <textarea value={message} onChange={handleMessageChange} />
-      </label>
+        <form className='profile-form' onSubmit={handleSubmit}>
+          <div><h2>Sign up</h2></div>
+          <label>
+            Name:
+            <input type="text" value={name} onChange={handleNameChange} placeholder="Enter your name"/>
+          </label>
+          <br />
+          <label>
+            Email:
+            <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter your email"/>
+          </label>
+          <br />
+          <label>
+            Phone Number:
+            <input type="number" value={phone} onChange={handlePhoneChange} placeholder="Enter your phone number"/>
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" value={password} onChange={handlePasswordChange} placeholder="Create a password"/>
+          </label>
+          <br />
+          <label>
+            Confirm Password:
+            <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Re-enter the password"/>
+          </label>
+          <br />
+          <label>
+            Skills:
+            <textarea value={skills} onChange={handleSkillsChange} placeholder='Enter your skills'/>
+          </label>
+          <br />
+          <label>
+            Aadhar Card:
+            <input type="file" id="picture" name="picture" onChange={(event) => setPicture(event.target.files[0])} />
+          </label>
+          <br />
+          <label>
+            Message:
+            <textarea value={message} onChange={handleMessageChange} placeholder="Write about yourself"/>
+          </label>
+          <br />
+          <button type="submit" onClick={upload}>Submit</button>
+          <div className='login-link'>
+          <h4>
+            Already have an account?
+            <NavLink className="nav-links" to="/login">Login</NavLink>
+          </h4>
+        </div>
+        </form>
       </div>
-      <br />
-      <button type="submit" onClick={upload}>Submit</button>
-    </form>
-    
-    </div>
     </>
   );
 }

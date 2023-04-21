@@ -1,9 +1,13 @@
-.navbar {
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+.navbar-inside {
     display: flex;
     padding: 10px;
     justify-content: space-between;
     align-items: center;
     background-color: transparent;
+    font-family: 'Maven Pro', sans-serif;
 }
 
 .brand {
@@ -39,21 +43,19 @@
 }
 
 .front {
-    position: relative;
-    padding-top: 15%;
+    position: absolute;
+    top: 12rem;
+    left: 3rem;
 }
 
-.front > .main-content {
-    margin-left: 40px;
-    font-size: 50px;
-    z-index: 1;
+.front > p {
+    font-size: 4rem;
+    margin-bottom: 0;
+    font-family: 'Dongle', sans-serif;
 }
 
-.front > .sub-content {
-    margin-top: 10px;
-    margin-left: 40px;
-    font-size: 17px;
-    z-index: 1;
+.front > h4 {
+    margin-top: 0;
 }
 
 .front-main > img {

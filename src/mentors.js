@@ -1,5 +1,5 @@
 import React from "react";
-import {useState} from "react";
+import { useState } from "react";
 import Navbar from "./navbar";
 import "./mentor.css";
 import Card from "./card";
@@ -14,21 +14,21 @@ export default function Mentors() {
     }
 
     console.log(skill);
-    const array=data.filter(
-        obj => obj.skills.indexOf(skill)>=0
+    const array = data.filter(
+        obj => obj.skills.indexOf(skill) >= 0
     )
     console.log(array)
 
-    const mentorcards=array.map(obj =>{
-        return <Card 
-        item={obj}
+    const mentorcards = array.map(obj => {
+        return <Card
+            item={obj}
         />
     })
 
     return (
         <div className="mentor">
-            <Navbar/>
-            <img src={mentorbg} alt="background" className="mentor-bg"/>
+            <Navbar />
+            <img src={mentorbg} alt="background" className="mentor-bg" />
             <div className="content">
                 <div className="mentor-head">
                     <p className="main-text">LEARN & CONNECT</p>
@@ -47,11 +47,9 @@ export default function Mentors() {
                     </form>
                 </div>
             </div>
-            <div>
-        <div className="card-div">
-        {mentorcards}
+            <div className="card-div">
+                {mentorcards}
+            </div>
         </div>
-    </div>
-    </div>
     )
 }

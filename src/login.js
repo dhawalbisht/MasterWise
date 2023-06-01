@@ -25,7 +25,7 @@ const SignIn = () => {
     event.preventDefault();
     const result = users.findIndex(user => user.email === email && user.password === password)
     if (result < 0) {
-      console.log("not found")
+      alert("User not found")
     }
     else {
       localStorage.setItem("userId", users[result].id)
@@ -35,38 +35,48 @@ const SignIn = () => {
 
   return (
     <div className="login">
-      <div className="imglogo">
-        <img src={pict} alt="Mentorz Logo" />
+      <div className="logo-login">
+        <img src={pict} alt="Mentorwise Logo" />
       </div>
-      <form className="login-form">
-        <div className="heading">
-          <NavLink className="nav-links" to="/"><img src={previousimg} alt="home-page" height="40rem" /></NavLink>
-          <p>Log in</p>
-        </div>
-        Email:
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value)
-          }}
-        />
-        Password:
-        <input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value)
-          }}
-        />
-        <button onClick={handleSubmit}>Submit</button>
-        <h4>
-          Don't have an account?
-          <NavLink className="nav-links" to="/signup">Create account</NavLink>
-        </h4>
-      </form>
+      <div className="login-form">
+        <form>
+          <div className="login-heading">
+            <NavLink className="link-home" to="/"><img src={previousimg} alt="home-page" height="40rem" /></NavLink>
+            <p>Log in</p>
+          </div>
+          <div className="login-info">
+            <label className="login-email">
+              <p>Email:</p>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                required
+                onChange={(event) => {
+                  setEmail(event.target.value)
+                }}
+              />
+            </label>
+            <label className="login-password">
+              <p>Password:</p>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                required
+                onChange={(event) => {
+                  setPassword(event.target.value)
+                }}
+              />
+            </label>
+            <button onClick={handleSubmit}>Log In</button>
+          </div>
+          <h5>
+            Don't have an account?
+            <NavLink className="link-signup" to="/signup">Create account</NavLink>
+          </h5>
+        </form>
+      </div>
     </div>
   )
 }

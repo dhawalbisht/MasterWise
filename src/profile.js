@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import pict from "./mentorlogo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./profile.css";
+import previousimg from "./images/previous.png"
 import { db, auth } from "./firebase-config";
 import {
   collection,
@@ -71,64 +72,51 @@ function ContactForm() {
   };
 
   return (
-    <>
-      <div classname="profile">
-        <div className="imglogo">
-          <img src={pict} alt="Mentorz Logo" />
-        </div>
+    <div className="profile-main">
+      <div className="profile-logo">
+        <img src={pict} alt="Mentorz Logo" />
+      </div>
+      <div className="profile-form">
+        <form onSubmit={handleSubmit}>
+          <div className='profile-heading'>
+            <NavLink className="link-home" to="/"><img src={previousimg} alt="home-page" height="40rem" /></NavLink>
+            <p>Sign up</p>
+          </div>
+          <div className='profile-input'>
+            <label>
+              Name:
+              <input type="text" value={name} onChange={handleNameChange} placeholder="Enter your name" required/>
+            </label>
 
-        <form className='profile-form' onSubmit={handleSubmit}>
-          <div><h2>Sign up</h2></div>
-          <label>
-            Name:
-            <input type="text" value={name} onChange={handleNameChange} placeholder="Enter your name"/>
-          </label>
-          <br />
-          <label>
-            Email:
-            <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter your email"/>
-          </label>
-          <br />
-          <label>
-            Phone Number:
-            <input type="number" value={phone} onChange={handlePhoneChange} placeholder="Enter your phone number"/>
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" value={password} onChange={handlePasswordChange} placeholder="Create a password"/>
-          </label>
-          <br />
-          <label>
-            Confirm Password:
-            <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Re-enter the password"/>
-          </label>
-          <br />
-          <label>
-            Skills:
-            <textarea value={skills} onChange={handleSkillsChange} placeholder='Enter your skills'/>
-          </label>
-          <br />
-          <label>
-            Aadhar Card:
-            <input type="file" id="picture" name="picture" onChange={(event) => setPicture(event.target.files[0])} />
-          </label>
-          <br />
-          <label>
-            Message:
-            <textarea value={message} onChange={handleMessageChange} placeholder="Write about yourself"/>
-          </label>
-          <br />
-          <button type="submit" onClick={upload}>Submit</button>
-          <div className='login-link'>
-          <h4>
+            <label>
+              Email:
+              <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter your email" required/>
+            </label>
+
+            <label>
+              Phone Number:
+              <input type="number" value={phone} onChange={handlePhoneChange} placeholder="Enter your phone number" required/>
+            </label>
+
+            <label>
+              Password:
+              <input type="password" value={password} onChange={handlePasswordChange} placeholder="Create a password" required/>
+            </label>
+
+            <label>
+              Confirm Password:
+              <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Re-enter the password" required/>
+            </label>
+
+            <button type="submit" onClick={upload}>Sign Up</button>
+          </div>
+          <h5>
             Already have an account?
-            <NavLink className="nav-links" to="/login">Login</NavLink>
-          </h4>
-        </div>
+            <NavLink className="link-login" to="/login">Login</NavLink>
+          </h5>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

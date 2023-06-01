@@ -16,7 +16,7 @@ export default [
         imageUrl: "/profile.jpg",
         link: "https://example.com",
         buttonText: "Contact",
-        skills: ["React","Java"],
+        skills: ["React","Java","python"],
         rating: 9.8,
     },
     {
@@ -32,11 +32,11 @@ export default [
     {
         id: 4,
         name: "Derek",
-        description: "I am here to teach you",
+        description: "I am here to teach you I am here to teach you I am here to teach you I am here to teach youI am here to teach you I am here to teach you I am here to teach you I am here to teach you ",
         imageUrl: "/profile.jpg",
         link: "https://example.com",
         buttonText: "Contact",
-        skills: ["java","Web Development"],
+        skills: ["java","Web Development","python"],
         rating: 9.8,
     },
     {

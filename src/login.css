@@ -1,53 +1,105 @@
 .login {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.logo-login {
   position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.logo-login > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.login-form > form {
   position: absolute;
-  top: 13rem;
-  right: 0;
-  padding: 0 5rem;
-  width: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-left: 4px groove black;
+  padding: 0.5rem 1.5rem;
+  width: 50%;
 }
 
-.login-form > h1 {
-  font-size: 2.5rem;
-}
-
-.heading {
+.login-heading {
   display: flex;
   margin-bottom: 1rem;
 }
-.heading > p {
-  font-size: 2.5rem;
+
+.link-home {
   margin: 0;
 }
 
-.login-form > input{
-  display: inline-block;
-  margin-bottom: 1rem;
-  margin-top: 0.3rem;
-  width: 30rem;
-  padding: 0.3rem;
+.login-heading > p {
+  margin: 0.5rem 1rem;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
 }
 
-.login-form > button {
+.login-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.login-info > label {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: medium;
+  font-weight: 600;
+}
+
+.login-email>p , .login-password>p {
+  margin: 0.2rem;
+  padding: 0;
+}
+
+.login-email>input , .login-password>input {
+  width: 15rem;
+  padding: 0.2rem;
+  border: none;
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(54, 55, 65, 0.37);
+}
+
+.login-info > button {
   margin-top: 1rem;
-  width: 30.5rem;
   padding: 0.4rem;
-  font-size: 1rem;
-  background-color: rgb(100, 49, 150);
+  border: none;
   color: white;
-  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: rgba(70, 86, 239, 0.837);
+  box-shadow: 0 1px 4px 0 rgba(51, 51, 53, 0.37);
 }
 
-.login-form > button:hover {
-  background-color: #006666;
+.login-info > button:hover {
+  cursor: pointer
 }
 
-.login-form > h4 {
-  width: 100%;
+.login-form > form > h5 {
   text-align: center;
+  margin: 0;
+}
+
+.link-signup {
+  text-decoration: none;
+  color: black;
+  margin-left: 1rem;
+  font-size: 1rem;
 }

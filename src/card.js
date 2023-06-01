@@ -12,8 +12,8 @@ const Card = (props) => {
                 return <input type="text" name="skills" value={data} className='skill-input' readOnly />;
             })}
         </p>
-        <p>Rating: {props.item.rating}/10</p>
-        <a href={props.item.link} className="card-button">{props.item.buttonText}</a>
+        <p className='rating'>Rating: {props.item.rating}/10</p>
+        <div className="card-button"><a href={props.item.link}>{props.item.buttonText}</a></div>
       </div>
     </div>
   );
